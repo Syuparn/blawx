@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from urllib.parse import urlparse
+
 
 # For adding a version identifier
 BLAWX_VERSION = "v1.6.22-alpha"
@@ -59,7 +62,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -159,3 +161,8 @@ LOGIN_REDIRECT_URL = '/'
 
 # Preferences requires sites, so we need to define a SITE_ID
 SITE_ID = 1
+
+ALLOWED_HOSTS = ["blawx-175058602677.asia-northeast1.run.app"]
+CSRF_TRUSTED_ORIGINS = ["https://blawx-175058602677.asia-northeast1.run.app/"]
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
