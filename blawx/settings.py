@@ -1,3 +1,6 @@
+import os
+
+
 """
 Django settings for blawx project.
 
@@ -68,6 +71,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'blawx.urls'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = []
+if 'CSRF_TRUSTED_ORIGINS' in os.environ:
+    CSRF_TRUSTED_ORIGINS.append(os.environ.get('CSRF_TRUSTED_ORIGINS'))
 
 TEMPLATES = [
     {
