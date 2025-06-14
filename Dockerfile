@@ -99,11 +99,15 @@ ARG SU_PASSWORD=blawx2022
 
 ENV DJANGO_SUPERUSER_PASSWORD=$SU_PASSWORD
 
+ARG ADMIN_USERNAME=admin
+
+ARG ADMIN_MAILADDRESS=admin@admin.com
+
 RUN python manage.py makemigrations
 
 RUN python manage.py migrate --run-syncdb
 
-RUN python manage.py createsuperuser --noinput --username admin --email admin@admin.com
+RUN python manage.py createsuperuser --noinput --username $ADMIN_USERNAME --email $ADMIN_MAILADDRESS
 
 RUN python load_data.py
 
