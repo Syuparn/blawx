@@ -612,7 +612,7 @@ blawxrun(Query, Human, Tree, Model) :-
                 #transcript.write(full_query)
                 with redirect_stderr(transcript):
                     # print("blawxrun(" + query + ",Human).")
-                    query_answer = swipl_thread.query("blawxrun((" + query + "),Human,Tree,Model).")
+                    query_answer = swipl_thread.query("blawxrun((" + query + "),Human,Tree,Model).", query_timeout_seconds=15.0)
                     
                 transcript.write(str(query_answer) + '\n')
 
