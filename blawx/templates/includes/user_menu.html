@@ -18,7 +18,7 @@
             </li>
             {% if user.is_authenticated %}
             <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
-            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            <li><form action='{% url "logout" %}' method='post' name='logout'>{% csrf_token %}<a class="dropdown-item" href="javascript:logout.submit()">Logout</a></form></li>
             {% else %}
             {% if preferences.BlawxPreference.allow_registration %}
             <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
