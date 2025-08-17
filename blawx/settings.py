@@ -131,7 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'MST'
+# set default time zone to avoid error
+# ValueError: Incorrect timezone setting: MST
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
