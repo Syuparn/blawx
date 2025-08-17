@@ -103,6 +103,8 @@ ARG ADMIN_USERNAME=admin
 
 ARG ADMIN_MAILADDRESS=admin@admin.com
 
+RUN mkdir /app/blawx/sqlite
+
 RUN python manage.py makemigrations
 
 RUN python manage.py migrate --run-syncdb
@@ -111,6 +113,9 @@ RUN python manage.py createsuperuser --noinput --username $ADMIN_USERNAME --emai
 
 RUN python load_data.py
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# HACK: move db temporalily and then move it back in execution time so that the initialized db can be mounted
+RUN mv /app/blawx/sqlite/db.sqlite3 /tmp
+
+CMD ["sh", "-c", "mv /tmp/db.sqlite3 /app/blawx/sqlite && python manage.py runserver 0.0.0.0:8000"]
 
 EXPOSE 8000
