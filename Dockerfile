@@ -116,6 +116,7 @@ RUN python load_data.py
 # HACK: move db temporalily and then move it back in execution time so that the initialized db can be mounted
 RUN mv /app/blawx/sqlite/db.sqlite3 /tmp
 
-CMD ["sh", "-c", "mv /tmp/db.sqlite3 /app/blawx/sqlite && python manage.py runserver 0.0.0.0:8000"]
+# move initialized db to the mounted directory, or just use the existing db
+CMD ["bash", "-c", "if [ ! -f /app/blawx/sqlite/db.sqlite3 ]; then mv /tmp/db.sqlite3 /app/blawx/sqlite; fi && python manage.py runserver 0.0.0.0:8000"]
 
 EXPOSE 8000
